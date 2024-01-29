@@ -36,7 +36,7 @@ install_nala() {
     debian_version=$(get_debian_version)
     if [ "$debian_version" == "11" ]; then
       echo "Installing Nala for Debian 11"
-      wget -O - https://deb.volian.org/volian/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/volian-archive-keyring.gpg
+      curl https://deb.volian.org/volian/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/volian-archive-keyring.gpg
       echo 'deb [signed-by=/usr/share/keyrings/volian-archive-keyring.gpg] https://deb.volian.org/volian scar main' | sudo tee /etc/apt/sources.list.d/volian.list
       sudo apt update
       sudo apt install nala -y
@@ -62,7 +62,7 @@ install_tmux() {
 }
 
 echo "Updating and upgrading your system..."
-sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y && apt install -y gpg
 
 install_tmux
 install_nala

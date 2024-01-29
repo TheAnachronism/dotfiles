@@ -2,6 +2,8 @@
 
 DOTFILES_DIR="$HOME/.dotfiles"
 
+mkdir -p "$HOME/.config" 
+
 get_debian_version() {
   local version
   version=$(cat /etc/debian_version)

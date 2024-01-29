@@ -66,6 +66,8 @@ install_tmux() {
   then
     print_info "Tmux is not installed. Installing now..."
     sudo apt install tmux -y
+    mkdir -p ~/.config/tmux/
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   else
     print_success "Tmux is already installed"
   fi
@@ -118,12 +120,15 @@ chsh -s $(which zsh)
 install_oh_my_zsh
 install_neovim
 
-# Copying neovim custom configs.
+# Linking neovim custom configs.
 ln -s $DOTFILES_DIR/nvim/custom ~/.config/nvim/lua/custom
 ln -s $DOTFILES_DIR/nvim/bin ~/bin
 
+# Linking tmux configs.
+ln -s $DOTFILES_DIR/tmux/tmux.conf ~/.config/tmux/tmux.conf
+
 # Setting up the custom .zshrc file
-cp $DOTFILES_DIR/zshrc $HOME/.zshrc
+ln -s $DOTFILES_DIR/zshrc ~/.zshrc
 
 # Dotfiles are complete.
 print_success "Dotfiles successfully installed."

@@ -49,6 +49,7 @@ install_nala() {
       sudo apt install -y ./volian-archive-*.deb
       sudo apt update
       sudo apt install man nala -y
+      rm -r ./volian-archive-*.deb
     elif [ "$debian_version" == "12" ]; then
       print_info "Installing Nala for Debian 12+..."
       sudo apt install nala -y
@@ -86,6 +87,7 @@ install_neovim() {
   if ! command -v nvim &> /dev/null
   then
     print_info "Neovim is not installed. Installing now..."
+    sudo apt install -y gcc
     brew install neovim
     print_success "Neovim installed, installing nvchad..."
     git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1

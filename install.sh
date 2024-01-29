@@ -36,8 +36,10 @@ install_nala() {
     debian_version=$(get_debian_version)
     if [ "$debian_version" == "11" ]; then
       echo "Installing Nala for Debian 11"
-      curl https://deb.volian.org/volian/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/volian-archive-keyring.gpg
-      echo 'deb [signed-by=/usr/share/keyrings/volian-archive-keyring.gpg] https://deb.volian.org/volian scar main' | sudo tee /etc/apt/sources.list.d/volian.list
+      mkdir -P .nala-install
+      curl -O https://gitlab.com/volian/volian-archive/uploads/b20bd8237a9b20f5a82f461ed0704ad4/volian-archive-keyring_0.1.0_all.deb .nala-install/
+      curl -O https://gitlab.com/volian/volian-archive/uploads/4ba4a75e391aa36f0cbe7fb59685eda9/volian-archive-scar_0.1.0_all.deb .nala-install/
+      sudo apt install -y .nala-install/volian-archive-*.deb
       sudo apt update
       sudo apt install nala -y
     elif [ "$debian_version" == "12" ]; then

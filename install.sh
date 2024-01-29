@@ -119,7 +119,8 @@ install_oh_my_zsh
 install_neovim
 
 # Copying neovim custom configs.
-cp -r $DOTFILES_DIR/nvim/custom ~/.config/nvim/lua/
+ln -s $DOTFILES_DIR/nvim/custom ~/.config/nvim/lua/custom
+ln -s $DOTFILES_DIR/nvim/bin ~/bin
 
 # Setting up the custom .zshrc file
 cp $DOTFILES_DIR/zshrc $HOME/.zshrc

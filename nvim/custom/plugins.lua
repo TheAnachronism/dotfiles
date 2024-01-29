@@ -21,7 +21,12 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "bash-language-server",
         "rust-analyzer",
+        "lua-language-server",
+        "html-lsp",
+        "prettier",
+        "stylua"
       },
     },
   }

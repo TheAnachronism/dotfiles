@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="amuse"
+ZSH_THEME="themes/base"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -66,12 +66,35 @@ ZSH_THEME="amuse"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+source ~/.dotfiles/features.sh
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew docker)
+plugins=(git brew virtualenv)
+
+# Conditional custom plugins
+if [ "$FEATURE_ENABLE_DOCKER" = "true" ]; then
+  plugins+=(docker docker-compose)
+fi
+
+if [ "$FEATURE_ENABLE_KUBERNETES" = "true" ]; then
+  plugins+=(kubectl kubectx kube-ps1 helm)
+fi
+
+if [ "$FEATURE_ENABLE_DOTNET" = "true" ]; then
+  plugins+=(dotnet)
+fi
+
+if [ "$FEATURE_ENABLE_FIREWALLD" = "true" ]; then
+  plugins+=(firewalld)
+fi
+
+if [ "$FEATURE_ENABLE_ONEPASSWORD" = "true" ]; then
+  plugins+=(1password)
+fi
 
 source $ZSH/oh-my-zsh.sh
 

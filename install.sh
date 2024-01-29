@@ -1,8 +1,7 @@
 #!/bin/bash
 
 DOTFILES_DIR="$HOME/.dotfiles"
-
-mkdir -p "$HOME/.config" 
+FEATURES_FILE="features.sh"
 
 get_debian_version() {
   local version
@@ -68,8 +67,6 @@ install_tmux() {
   then
     print_info "Tmux is not installed. Installing now..."
     sudo apt install tmux -y
-    mkdir -p ~/.config/tmux/
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   else
     print_success "Tmux is already installed"
   fi
@@ -93,19 +90,26 @@ install_neovim() {
     print_info "Neovim is not installed. Installing now..."
     sudo apt install -y gcc
     brew install neovim
-    print_success "Neovim installed, installing nvchad..."
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-    print_success "NVChad successfully installed."
   else
     print_success "Neovim is already installed."
   fi
 }
 
+enable_feature() {
+  local replacement="s/FEATURE_ENABLE_$1=false/FEATURE_ENABLE_$1=true/"
+  sed -i "$replacement" "$FEATURES_FILE"
+}
+
 print_info "Updating and upgrading your system..."
-sudo apt update && sudo apt upgrade -y && apt install -y gpg
+sudo apt update && sudo apt upgrade -y && sudo apt install -y gpg
 
 install_homebrew
+
+# Tmux
 install_tmux
+mkdir -p ~/.config/tmux/
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 install_nala
 
 if ! command -v zsh &> /dev/null
@@ -120,7 +124,12 @@ fi
 chsh -s $(which zsh)
 
 install_oh_my_zsh
+
+# NeoVim
 install_neovim
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+print_success "NVChad successfully installed."
+
 
 # Linking neovim custom configs.
 ln -s $DOTFILES_DIR/nvim/custom ~/.config/nvim/lua/custom
@@ -130,8 +139,35 @@ ln -s $DOTFILES_DIR/nvim/bin ~/bin
 ln -s $DOTFILES_DIR/tmux/tmux.conf ~/.config/tmux/tmux.conf
 
 # Setting up the custom .zshrc file
+rm ~/.zshrc
 ln -s $DOTFILES_DIR/zshrc ~/.zshrc
+ln -s $DOTFILES_DIR/zsh/themes ~/.oh-my-zsh/custom/themes/
+
+cp "$DOTFILES_DIR/features.example.sh" "$DOTFILES_DIR/features.sh"
+
+
+# Setting up variables to enable features
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --docker) enable_feature "DOCKER"; shift 1;;
+    --kubernetes) enable_feature "KUBERNETES"; shift 1;;
+    --dotnet) enable_feature "DOTNET"; shift 1;;
+    --firewalld) enable_feature "FIREWALLD"; shift;;
+    --1password) enable_feature "ONEPASSWORD"; shift;;
+  esac
+done
+
+source "$FEATURES_FILE"
+
+if [ "FEATURE_ENABLE_KUBERNETES" = "true" ]; then
+  brew install kubectl kubectx helm kube-ps1
+fi
+
 
 # Dotfiles are complete.
 print_success "Dotfiles successfully installed."
-zsh
+if [ -z "$ZSH_VERSION" ]; then
+  exec zsh
+else
+  source ~/.zshrc
+fi

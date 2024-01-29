@@ -13,8 +13,24 @@ install_oh_my_zsh() {
   fi
 }
 
+install_nala() {
+  if ! command -v nala &> /dev/null
+  then
+    echo "Nala is not installed. Installing now..."
+    echo "Adding Nala repository..."
+    echo 'deb http://deb.volian.org/volian/ scar main' | sudo tee /etc/apt/sources.list.d/nala.list
+    wget -qO - http://deb.volian.org/volian/key.gpg | sudo apt-key add -
+    sudo apt update
+    sudo apt install nala -y
+  else
+    echo "Nala is already installed."
+  fi
+}
+
 echo "Updating and upgrading your system..."
 sudo apt update && sudo apt upgrade -y
+
+install_nala
 
 if ! command -v zsh &> /dev/null
 then

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOTFILES_DIR="$HOME/.dotfiles"
-FEATURES_FILE="features.sh"
+FEATURES_FILE="$DOTFILES_DIR/features.sh"
 
 get_debian_version() {
   local version

@@ -111,6 +111,10 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+#
+if [[ -n "$SSH_CLIENT" ]]; then
+  export GPG_TTY=$(tty)
+fi
 
 export SUDO_EDITOR=vim
 

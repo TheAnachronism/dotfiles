@@ -89,8 +89,8 @@ install_neovim() {
   then
     print_info "Neovim is not installed. Installing now..."
     sudo apt install -y gcc
-    brew install neovim
-  else
+    brew install neovim lazygit
+ else
     print_success "Neovim is already installed."
   fi
 }

@@ -1,6 +1,6 @@
 local M = {}
 
-M.tmuxNavigate = {
+M.general = {
   n = {
     ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
     ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
@@ -10,12 +10,9 @@ M.tmuxNavigate = {
 }
 
 M.lazygit = {
-  plugin = true,
   n = {
     ["<leader>gg"] = {"<cmd> LazyGit<CR>", "LazyGit"},
   },
 }
 
-require("core.utils").load_mappings("tmuxNavigate")
-require("core.utils").load_mappings("lazygit")
 return M

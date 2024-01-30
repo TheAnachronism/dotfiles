@@ -14,6 +14,10 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
   command = "set filetype=sh"
 })
 
+
+-- Markdown
+vim.g.vim_markdown_frontmatter = 1
+
 -- WSL clipboard
 local in_wsl = os.getenv("WSL_DISTRO_NAME") ~= nil
 

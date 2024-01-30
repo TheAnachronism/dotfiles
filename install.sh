@@ -27,6 +27,11 @@ print_success() {
   echo -e "\033[0;032m$1\033[0m"
 }
 
+install_dependencies() {
+  sudo apt update
+  sudo apt install man curl ripgrep jq gcc gpg -y
+}
+
 install_oh_my_zsh() {
   # Install Oh-My-Zsh
   if [ ! -d "$HOME/.oh-my-zsh/" ] 
@@ -48,8 +53,7 @@ install_nala() {
       curl -O https://gitlab.com/volian/volian-archive/uploads/b20bd8237a9b20f5a82f461ed0704ad4/volian-archive-keyring_0.1.0_all.deb 
       curl -O https://gitlab.com/volian/volian-archive/uploads/4ba4a75e391aa36f0cbe7fb59685eda9/volian-archive-scar_0.1.0_all.deb
       sudo apt install -y ./volian-archive-*.deb
-      sudo apt update
-      sudo apt install man nala -y
+      sudo apt install nala -y
       rm -r ./volian-archive-*.deb
     elif [ "$debian_version" == "12" ]; then
       print_info "Installing Nala for Debian 12+..."
@@ -70,6 +74,14 @@ install_tmux() {
   else
     print_success "Tmux is already installed"
   fi
+
+  if ! command -v tmuxinator &> /dev/null
+  then
+    print_info "Tmuxinator is not installed. Installing now..."
+    brew install tmuxinator
+  else
+    print_success "Tmuxinator is already installed."
+  fi
 }
 
 install_homebrew() {
@@ -88,7 +100,6 @@ install_neovim() {
   if ! command -v nvim &> /dev/null
   then
     print_info "Neovim is not installed. Installing now..."
-    sudo apt install -y gcc
     brew install neovim lazygit
  else
     print_success "Neovim is already installed."
@@ -101,7 +112,8 @@ enable_feature() {
 }
 
 print_info "Updating and upgrading your system..."
-sudo apt update && sudo apt upgrade -y && sudo apt install -y gpg
+
+install_dependencies
 
 install_homebrew
 

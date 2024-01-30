@@ -7,6 +7,14 @@ local plugins = {
     },
   },
   {
+    "preservim/vim-markdown",
+    lazy = false,
+    branch = "master",
+    dependencies = {
+      "godlygeek/tabular",
+    }
+  },
+  {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
@@ -26,7 +34,9 @@ local plugins = {
         "lua-language-server",
         "html-lsp",
         "prettier",
-        "stylua"
+        "stylua",
+        "marksman",
+        "markdownlint",
       },
     },
   }

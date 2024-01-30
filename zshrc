@@ -116,6 +116,7 @@ if [[ -n "$SSH_CLIENT" ]]; then
   export GPG_TTY=$(tty)
 fi
 
+export EDITOR=vim
 export SUDO_EDITOR=vim
 
 # Compilation flags

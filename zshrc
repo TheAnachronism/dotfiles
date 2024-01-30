@@ -112,6 +112,8 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+export SUDO_EDITOR=vim
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 

@@ -75,8 +75,10 @@ source ~/.dotfiles/features.sh
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git brew virtualenv tmux tmuxinator)
 
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOQUIT=false
+if [[ -z "SSH_CLIENT" ]]; then
+  ZSH_TMUX_AUTOSTART=true
+  ZSH_TMUX_AUTOQUIT=false
+fi
 
 # Conditional custom plugins
 if [ "$FEATURE_ENABLE_DOCKER" = "true" ]; then

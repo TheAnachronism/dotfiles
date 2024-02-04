@@ -75,7 +75,7 @@ source ~/.dotfiles/features.sh
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git brew virtualenv tmux tmuxinator)
 
-if [[ -z "SSH_CLIENT" ]]; then
+if [[ ! -v "SSH_CLIENT" ]]; then
   ZSH_TMUX_AUTOSTART=true
   ZSH_TMUX_AUTOQUIT=false
 fi

@@ -138,8 +138,8 @@ export SUDO_EDITOR=vim
 alias vim=/home/linuxbrew/.linuxbrew/bin/nvim
 
 alias mux=tmuxinator
-alias snu="sudo nala update && sudo nala upgrade"
 alias sni="sudo nala install"
+alias snu="sudo nala upgrade"
 
 if [ -f "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"

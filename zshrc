@@ -145,6 +145,7 @@ alias vim=/home/linuxbrew/.linuxbrew/bin/nvim
 alias mux=tmuxinator
 alias sni="sudo nala install"
 alias snu="sudo nala upgrade"
+alias lg="lazygit"
 
 if [ -f "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"

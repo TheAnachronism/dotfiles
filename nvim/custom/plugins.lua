@@ -6,14 +6,14 @@ local plugins = {
       "nvim-lua/plenary.nvim",
     },
   },
-  {
-    "preservim/vim-markdown",
-    lazy = false,
-    branch = "master",
-    dependencies = {
-      "godlygeek/tabular",
-    }
-  },
+  -- {
+  --   "preservim/vim-markdown",
+  --   lazy = false,
+  --   branch = "master",
+  --   dependencies = {
+  --     "godlygeek/tabular",
+  --   }
+  -- },
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,

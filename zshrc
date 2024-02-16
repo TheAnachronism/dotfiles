@@ -128,6 +128,7 @@ fi
 
 export EDITOR=vim
 export SUDO_EDITOR=vim
+export VISUAL=vim
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -141,6 +142,8 @@ export SUDO_EDITOR=vim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=/home/linuxbrew/.linuxbrew/bin/nvim
+
+eval "$(zoxide init --cmd cd zsh)"
 
 alias mux=tmuxinator
 alias sni="sudo nala install"

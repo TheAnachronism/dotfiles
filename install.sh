@@ -84,6 +84,20 @@ install_tmux() {
   fi
 }
 
+install_zoxide() {
+  if ! command -v zoxide &> /dev/null
+  then
+    print_info "Zoxide is not installed. Installing now..."
+    curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+  fi
+
+  if ! command -v fzf &> /dev/null
+  then
+    print_info "Fzf is not installed. Installing now..."
+    brew install fzf
+  fi
+}
+
 install_homebrew() {
   if ! command -v brew &> /dev/null
   then
@@ -121,6 +135,8 @@ install_homebrew
 install_tmux
 mkdir -p ~/.config/tmux/
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+install_zoxide
 
 install_nala
 

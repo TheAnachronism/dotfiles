@@ -1,5 +1,5 @@
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
-local user_host="%B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m%{$reset_color%} "
+local user_host="%B%(!.%{$fg[red]%}.%{$fg[green]%})%n@${fg[red]%}%m%{$reset_color%} "
 local user_symbol='%(!.#.$)'
 local current_dir="%B%{$fg[blue]%}%~ %{$reset_color%}"
 
@@ -7,11 +7,19 @@ local vcs_branch='$(git_prompt_info)$(hg_prompt_info)'
 local venv_prompt='$(virtualenv_prompt_info)'
 local kube_prompt='$(kube_ps1)'
 
+function conda_prompt_info(){
+  if [[ -n ${CONDA_DEFAULT_ENV} && "$CONDA_DEFAULT_ENV" != "base" ]]; then
+    echo "${ZSH_THEME_VIRTUALENV_PREFIX=[}${CONDA_DEFAULT_ENV:t:gs/%/%%}${ZSH_THEME_VIRTUALENV_SUFFIX=]}"
+  fi
+}
+
+local conda_prompt='$(conda_prompt_info)'
+
 source ~/.dotfiles/features.sh
 
 ZSH_THEME_RVM_PROMPT_OPTIONS="i v g"
 
-local top_prompt="╭─${user_host}${current_dir}${vcs_branch}${venv_prompt}"
+local top_prompt="╭─${user_host}${current_dir}${vcs_branch}${venv_prompt}${conda_prompt}"
 if [ "$FEATURE_ENABLE_KUBERNETES" = true ]; then
   source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
 

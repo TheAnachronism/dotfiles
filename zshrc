@@ -149,6 +149,7 @@ alias mux=tmuxinator
 alias sni="sudo nala install"
 alias snu="sudo nala upgrade"
 alias lg="lazygit"
+alias xdg-open='~/.dotfiles/vscode-xdg-open.sh'
 
 if [ -d $HOME/.cargo/ ]; then
   export PATH=$HOME/.cargo/bin/:$PATH

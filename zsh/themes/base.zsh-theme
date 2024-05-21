@@ -20,7 +20,7 @@ source ~/.dotfiles/features.sh
 ZSH_THEME_RVM_PROMPT_OPTIONS="i v g"
 
 if [ "$DISABLE_USER_INFO_IN_PROMPT" = true ]; then
-  user_host="%B%{$fg[green]%}$%{$reset_color%} "
+  user_host="%B%{$fg[green]%}%m%{$reset_color%} "
 fi
 
 local top_prompt="╭─${user_host}${current_dir}${vcs_branch}${venv_prompt}${conda_prompt}"

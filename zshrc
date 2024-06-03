@@ -5,7 +5,6 @@ export PATH=$HOME/bin:$HOME/.local/bin/:/usr/local/bin:/usr/local/go/bin:$PATH
 if [ "$FEATURE_ENABLE_DOTNET" = "true" ]; then
   export PATH=$HOME/.dotnet/tools/:$PATH
 fi
- 
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -142,6 +141,10 @@ export VISUAL=vim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=/home/linuxbrew/.linuxbrew/bin/nvim
+
+if [ "$IS_ARM_BASED" = "true" ]; then
+  alias vim=/usr/local/bin/nvim
+fi
 
 eval "$(zoxide init --cmd cd zsh)"
 

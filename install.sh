@@ -180,8 +180,9 @@ while [ "$#" -gt 0 ]; do
     --docker) enable_feature "DOCKER"; shift 1;;
     --kubernetes) enable_feature "KUBERNETES"; shift 1;;
     --dotnet) enable_feature "DOTNET"; shift 1;;
-    --firewalld) enable_feature "FIREWALLD"; shift;;
-    --1password) enable_feature "ONEPASSWORD"; shift;;
+    --firewalld) enable_feature "FIREWALLD"; shift 1;;
+    --1password) enable_feature "ONEPASSWORD"; shift 1;;
+    --arm) enable_feature "IS_ARM_BASED"; shift 1;;
   esac
 done
 

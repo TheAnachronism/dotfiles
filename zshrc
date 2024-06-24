@@ -178,3 +178,6 @@ if [ -d $HOME/miniconda3/ ]; then
   fi
   unset __conda_setup
 fi
+
+# TheFuck
+eval $(thefuck --alias)

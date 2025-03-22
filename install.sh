@@ -98,14 +98,6 @@ install_zoxide() {
   fi
 }
 
-install_thefuck() {
-  if ! command -v fuck &> /dev/null
-  then
-    print_info "TheFuck is not installed. Installing now..."
-    brew install thefuck
-  fi
-}
-
 install_homebrew() {
   if ! command -v brew &> /dev/null
   then
@@ -145,7 +137,6 @@ mkdir -p ~/.config/tmux/
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 install_zoxide
-install_thefuck
 
 install_nala
 

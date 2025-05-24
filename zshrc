@@ -142,6 +142,16 @@ export VISUAL=vim
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=/home/linuxbrew/.linuxbrew/bin/nvim
 
+gdd ()
+{
+  gallery-dl -D . -f "$1.{extension}" $2
+}
+
+gdl ()
+{
+  gallery-dl -D . $1
+}
+
 if [ "$IS_ARM_BASED" = "true" ]; then
   alias vim=/usr/local/bin/nvim
 fi
@@ -153,6 +163,10 @@ alias sni="sudo nala install"
 alias snu="sudo nala upgrade"
 alias lg="lazygit"
 alias xdg-open='~/.dotfiles/vscode-xdg-open.sh'
+
+if [ -d $HOME/.vscode-server/ ]; then
+  source $(code --locate-shell-integration-path zsh)
+fi
 
 if [ -d $HOME/.cargo/ ]; then
   export PATH=$HOME/.cargo/bin/:$PATH
